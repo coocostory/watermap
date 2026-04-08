@@ -1,4 +1,4 @@
-# WaterMap 水位监测系统
+# WaterMap
 
 [English](./README_EN.md) | [中文](./README.md)
 
