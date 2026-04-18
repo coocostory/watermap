@@ -2,6 +2,8 @@
 
 WaterMap is a mobile-first real-time water level monitoring application. It fetches data from an Open Source API and displays monitoring stations on an interactive map with historical trend charts.
 
+![WaterMap](./img.png)
+
 ## Features
 
 - Real-time water level monitoring on OpenStreetMap
@@ -41,4 +43,4 @@ NEXT_PUBLIC_MAP_CENTER_LNG=106.55
 
 ---
 
-[中文](./README_ZH.md)
+[中文](./README.md)

@@ -21,12 +21,34 @@ export default function TrendChart({ data, height = 160, showLegend = true, warn
     return <div className="h-40 flex items-center justify-center text-gray-400">暂无数据</div>
   }
 
+  // 计算 Y 轴上下限，让趋势更清晰
+  const values = data.map(d => d.z).filter((v): v is number => v != null)
+  let yMin: number | 'auto' = 'auto'
+  let yMax: number | 'auto' = 'auto'
+  if (values.length > 0) {
+    const dataMin = Math.min(...values)
+    const dataMax = Math.max(...values)
+    const range = dataMax - dataMin
+    // 最小范围 0.5m，避免数据太平导致看不出趋势
+    const padding = Math.max(range * 0.3, 0.25)
+    let lower = dataMin - padding
+    let upper = dataMax + padding
+    // 如果有警戒线，确保 Y 轴范围包含警戒线
+    if (warnLine != null) {
+      if (warnLine < lower) lower = warnLine - padding * 0.5
+      if (warnLine > upper) upper = warnLine + padding * 0.5
+    }
+    // 保留两位小数
+    yMin = Math.floor(lower * 100) / 100
+    yMax = Math.ceil(upper * 100) / 100
+  }
+
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={formatted} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+      <LineChart data={formatted} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
         <XAxis dataKey="time" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
-        <YAxis tick={{ fontSize: 10 }} width={45} />
+        <YAxis tick={{ fontSize: 10 }} width={50} domain={[yMin, yMax]} />
         <Tooltip
           contentStyle={{ fontSize: 12 }}
           formatter={(value: number) => [`${value.toFixed(2)}m`, '水位']}

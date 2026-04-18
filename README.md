@@ -6,6 +6,8 @@
 
 WaterMap 是一个移动端优先的实时水位监测应用。从开放 API 获取数据，在交互式地图上展示监测站点，并提供历史趋势图表。
 
+![WaterMap](./img.png)
+
 ## 功能
 
 - 实时水位监测（OpenStreetMap 地图）

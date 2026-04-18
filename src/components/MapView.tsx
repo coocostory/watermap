@@ -71,9 +71,10 @@ export default function MapView({
         html: `<div style="display:flex;flex-direction:column;align-items:center;">
           <div style="background:${color};width:16px;height:16px;border:2px solid white;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
           <div style="background:rgba(255,255,255,0.9);border-radius:3px;padding:1px 3px;font-size:9px;font-weight:bold;color:#333;margin-top:2px;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,0.15);">${levelText}</div>
+          <div style="background:rgba(255,255,255,0.85);border-radius:3px;padding:0px 3px;font-size:16px;color:${color};margin-top:1px;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;text-align:center;">${station.stnm || ''}</div>
         </div>`,
-        iconSize: [40, 26],
-        iconAnchor: [20, 8],
+        iconSize: [120, 52],
+        iconAnchor: [60, 8],
       })
       const marker = L.marker([station.latitude, station.longitude], { icon })
       marker.on('click', () => onMarkerClick(station))
